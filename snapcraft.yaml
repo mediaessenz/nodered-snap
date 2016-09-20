@@ -1,5 +1,5 @@
 name: nodered
-version: 0.13
+version: 0.14
 summary: A visual tool for wiring the Internet of Things
 description: Node-RED is a tool for wiring together hardware devices, APIs and online services in new and interesting ways.
 confinement: strict
@@ -12,12 +12,60 @@ apps:
     plugs:
       - network-bind
       - network
+      - bluez
+      - bluetooth-control
+      - pulseaudio
+
+slots:
+  library-slot:
+    content: library-dir
+    interface: content
+    write: 
+      - /lib/flows
+      - awscerts
 
 parts:
   red:
     plugin: nodejs
+    stage-packages:
+      - libbluetooth-dev
+      - gnustep-gui-runtime
+    #source: https://github.com/mectors/node-red-contrib-aws-iot.git
     node-packages:
       - node-red
+      #- node-red-contrib-noble
+      #- node-red-contrib-ble
+      #- node-red-contrib-ble-uart
+      #- node-red-contrib-bluetooth
+      #- node-red-contrib-bluetooth-serial
+      # hardcoded aws certs need to be fixed first - node-red-contrib-aws-iot-hub
+      - node-red-contrib-azure-iot-hub
+      - node-red-node-openwhisk
+      - node-red-bluemix-nodes
+      - node-red-node-watson
+      - node-red-contrib-modbus
+      - node-red-contrib-thingrest
+      - node-red-node-wemo
+      - node-red-node-sensortag
+      - node-red-contrib-facebook
+      - node-red-contrib-statistics
+      - node-red-contrib-os
+      - node-red-contrib-messagehub
+      - node-red-contrib-azure-table-storage
+      - node-red-contrib-azure-blob-storage
+      - node-red-contrib-aws-sdk
+      - node-red-contrib-hueplus
+      - node-red-node-aws
+      - node-red-contrib-ibm-watson-iot
+      - node-red-contrib-smartplug
+      - node-red-contrib-twitter-stream
+      - node-red-contrib-samsung-tv
+      - node-red-contrib-chromecast
+      - node-red-contrib-kafka-producer
+      - node-red-contrib-foursquare-api
+      - node-red-contrib-wii
+      - node-red-contrib-play-audio
+      - node-red-contrib-say
   settings:
     plugin: dump
     source: settings
