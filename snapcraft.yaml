@@ -12,17 +12,19 @@ apps:
     plugs:
       - network-bind
       - network
-      - bluez
+      - network-observe
+      #- bluez
       - bluetooth-control
       - pulseaudio
+      - camera
 
-slots:
-  library-slot:
+#slots:
+  #library-slot:
 #    content: library-dir
-    interface: content
-    write: 
-      - /lib/flows
-      - awscerts
+    #interface: content
+    #write: 
+      #- lib/flows
+      #- awscerts
 
 parts:
   red:
@@ -30,6 +32,9 @@ parts:
     stage-packages:
       - libbluetooth-dev
       - gnustep-gui-runtime
+      - blueman
+      - bluez
+      - bluetooth
     #source: https://github.com/mectors/node-red-contrib-aws-iot.git
     node-packages:
       - node-red
@@ -46,7 +51,7 @@ parts:
       - node-red-contrib-modbus
       - node-red-contrib-thingrest
       - node-red-node-wemo
-      - node-red-node-sensortag
+      #- node-red-node-sensortag
       - node-red-contrib-facebook
       - node-red-contrib-statistics
       - node-red-contrib-os
