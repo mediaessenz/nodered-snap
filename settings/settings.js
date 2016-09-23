@@ -16,6 +16,7 @@
 
 // Adapt to snappy FS requirements
 var snap_data = process.env.SNAP_USER_DATA
+var port = process.env.NODERED_PORT
 
 // The `https` setting requires the `fs` module. Uncomment the following
 // to make it available:
@@ -23,7 +24,7 @@ var snap_data = process.env.SNAP_USER_DATA
 
 module.exports = {
     // the tcp port that the Node-RED web server is listening on
-    uiPort: 1880,
+    uiPort: port,
 
     // By default, the Node-RED UI accepts connections on all IPv4 interfaces.
     // The following property can be used to listen on a specific interface. For
