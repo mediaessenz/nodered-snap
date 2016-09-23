@@ -50,6 +50,9 @@ parts:
       - node-red-contrib-bluetooth-serial
       - node-red-node-sensortag
       - node-red-contrib-wii
+    filesets:
+      bluetoothmodules: [ -lib/node_modules/npm ]
+    stage: [ $bluetoothmodules ]
   cloud:
       plugin: nodejs
       #after: [red]
@@ -76,6 +79,9 @@ parts:
         - node-red-node-aws
         - node-red-contrib-ibm-watson-iot
         - node-red-contrib-smartplug
+      filesets:
+        cloudmodules: [ -lib/node_modules/npm ]
+      stage: [ $cloudmodules ]
   other:
       plugin: nodejs
       #after: [red]
@@ -99,6 +105,9 @@ parts:
         - node-red-contrib-statistics
         - node-red-contrib-os
         - node-red-contrib-modbus
+      filesets:
+        othermodules: [ -lib/node_modules/npm ]
+      stage: [ $othermodules ]
   settings:
     plugin: dump
     source: settings
