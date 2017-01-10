@@ -20,3 +20,10 @@ When the snap is running you can view the system log using
     tail -f /var/log/syslog | grep ' snap'
 
 You may wish to filter it further of course if you run a lot of snaps.
+
+You can also use
+
+    sudo snap disable node-red
+    sudo snap enable node-red
+
+to stop and restart the application.

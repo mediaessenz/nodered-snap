@@ -1,7 +1,7 @@
 name: node-red
 version: 0.15.3
 summary: A visual tool for wiring the Internet of Things
-description: Node-RED is a node.js and web based tool for wiring together hardware devices, APIs and online services in new and interesting ways.
+description: Node-RED is a flow based programming application for wiring together hardware devices, APIs and online services in new and interesting ways.
 confinement: strict
 grade: stable
 

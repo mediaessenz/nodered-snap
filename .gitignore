@@ -4,3 +4,4 @@ parts
 stage
 tmp
 .remote-sync.json
+.DS*
