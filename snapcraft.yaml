@@ -1,75 +1,35 @@
-name: nodered
-version: 0.15
+name: node-red
+version: 0.15.3
+architectures: [ all ]
 summary: A visual tool for wiring the Internet of Things
-description: Node-RED is a tool for wiring together hardware devices, APIs and online services in new and interesting ways.
+description: Node-RED is a node.js and web based tool for wiring together hardware devices, APIs and online services in new and interesting ways.
 confinement: strict
 grade: stable
 
 apps:
-  red:
+  node-red:
     daemon: simple
     command: bin/launch
     plugs:
       - network-bind
       - network
       - network-observe
-      - bluetooth-control
+      - serial-port
       - pulseaudio
       - camera
 parts:
   red:
     plugin: nodejs
+    node-engine: 6.9.4
     stage-packages:
       - gnustep-gui-runtime
     node-packages:
       - node-red
-  bluetooth:
-    plugin: nodejs
-    #after: [red]
-    stage-packages:
-      - libbluetooth-dev
-      - blueman
-      - bluez
-      - bluetooth
-      - libglib2.0-dev
-      - libudev-dev
-    node-packages:
-      - node-red-contrib-noble
-      - node-red-contrib-ble
-      - node-red-contrib-ble-uart
-      - node-red-contrib-bluetooth
-      - node-red-contrib-bluetooth-serial
-      - node-red-node-sensortag
-    filesets:
-      bluetoothmodules: [ -lib/node_modules/npm ]
-    stage: [ $bluetoothmodules ]
-  cloud:
-      plugin: nodejs
-      #after: [red]
-      build-packages:
-        - python
-        - make
-        - g++
-      stage-packages:
-        - gnustep-gui-runtime
-      #source: https://github.com/mectors/node-red-contrib-aws-iot.git
-      node-packages:
-        # hardcoded aws certs need to be fixed first
-        - node-red-contrib-aws-iot-hub
-        - node-red-contrib-azure-iot-hub
-        - node-red-node-openwhisk
-        - node-red-bluemix-nodes
-        - node-red-node-watson
-        - node-red-contrib-messagehub
-        - node-red-contrib-azure-table-storage
-        - node-red-contrib-azure-blob-storage
-        - node-red-contrib-aws-sdk
-        - node-red-contrib-hueplus
-        - node-red-node-aws
-        - node-red-contrib-ibm-watson-iot
-      filesets:
-        cloudmodules: [ -lib/node_modules/npm ]
-      stage: [ $cloudmodules ]
+      - node-red-node-random
+      - node-red-node-smooth
+      - node-red-node-ping
+      - node-red-contrib-ibm-watson-iot
+      - node-red/node-red-dashboard
   settings:
     plugin: dump
     source: settings
