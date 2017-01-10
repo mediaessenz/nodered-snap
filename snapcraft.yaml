@@ -20,6 +20,8 @@ parts:
   red:
     plugin: nodejs
     node-engine: 6.9.4
+    build-packages:
+      - python
     stage-packages:
       - gnustep-gui-runtime
     node-packages:
