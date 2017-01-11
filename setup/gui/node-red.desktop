@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Node-RED
+Comment=Flow based application composer for the Internet of Things
+Icon=${SNAP}/meta/gui/icon.png
+Exec=node-red.node-red %U
+Type=Application
+StartupNotify=true
+Encoding=UTF-8
+Terminal=true
+Categories=Development;

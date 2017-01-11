@@ -21,12 +21,12 @@ When the snap is running you can view the system log using
 
 You may wish to filter it further of course if you run a lot of snaps.
 
-You can also use
+You can also stop and restart the application by
 
     sudo snap disable node-red
     sudo snap enable node-red
 
-to stop and restart the application.
+Currently there is no easy access to the serial port
 
 #### Settings
 

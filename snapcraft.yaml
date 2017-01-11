@@ -14,16 +14,16 @@ apps:
       - network
       - network-observe
       - serial-port
+      - raw-usb
       - pulseaudio
       - camera
 parts:
   red:
     plugin: nodejs
     node-engine: 6.9.4
-    build-packages:
-      - python
     stage-packages:
       - gnustep-gui-runtime
+      - python
     node-packages:
       - node-red
       - node-red-node-random
