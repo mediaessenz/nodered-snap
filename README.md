@@ -27,3 +27,8 @@ You can also use
     sudo snap enable node-red
 
 to stop and restart the application.
+
+#### Settings
+
+The **settings.js** and **flows.json** file are located at
+`/root/snap/node-red/{version}/settings.js`
