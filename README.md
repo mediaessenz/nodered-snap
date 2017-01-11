@@ -32,3 +32,5 @@ to stop and restart the application.
 
 The **settings.js** and **flows.json** file are located at
 `/root/snap/node-red/{version}/settings.js`
+
+The base port can be set by the `$PORT` environment variable, or in the `settings.js` file.
