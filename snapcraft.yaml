@@ -9,6 +9,7 @@ apps:
   node-red:
     command: bin/launch
     plugs:
+      - home
       - network-bind
       - network
       - network-observe
