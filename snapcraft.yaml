@@ -1,5 +1,5 @@
 name: node-red
-version: 0.15.3
+version: 0.17.5
 summary: A visual tool for wiring the Internet of Things
 description: Node-RED is a flow based programming application for wiring together hardware devices, APIs and online services in new and interesting ways.
 confinement: strict
@@ -7,9 +7,10 @@ grade: stable
 
 apps:
   node-red:
-    daemon: simple
     command: bin/launch
+    daemon: simple
     plugs:
+      - home
       - network-bind
       - network
       - network-observe
@@ -20,7 +21,7 @@ apps:
 parts:
   red:
     plugin: nodejs
-    node-engine: 6.9.4
+    node-engine: 6.11.3
     stage-packages:
       - gnustep-gui-runtime
       - python
@@ -39,7 +40,7 @@ parts:
         - .
     organize:
       start.sh : bin/launch
-    snap:
+    prime:
       - .
     filesets:
       all: [ . ]
