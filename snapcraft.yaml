@@ -14,10 +14,6 @@ apps:
       - network-bind
       - network
       - network-observe
-      - serial-port
-      - raw-usb
-      - pulseaudio
-      - camera
 parts:
   red:
     plugin: nodejs
@@ -38,10 +34,8 @@ parts:
     filesets:
       settings:
         - .
+      all: [ . ]
     organize:
       start.sh : bin/launch
     prime:
       - .
-    filesets:
-      all: [ . ]
- 
