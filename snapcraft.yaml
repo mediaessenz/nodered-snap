@@ -27,7 +27,7 @@ parts:
       - node-red-node-smooth
       - node-red-node-ping
       - node-red-contrib-ibm-watson-iot
-      - node-red/node-red-dashboard
+      - node-red-dashboard
   settings:
     plugin: dump
     source: settings
