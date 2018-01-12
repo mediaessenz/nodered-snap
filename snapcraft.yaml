@@ -14,14 +14,10 @@ apps:
       - network-bind
       - network
       - network-observe
-      - serial-port
-      - raw-usb
-      - pulseaudio
-      - camera
 parts:
   red:
     plugin: nodejs
-    node-engine: 6.11.3
+    node-engine: 6.12.3
     stage-packages:
       - gnustep-gui-runtime
       - python
@@ -30,7 +26,6 @@ parts:
       - node-red-node-random
       - node-red-node-smooth
       - node-red-node-ping
-      - node-red-contrib-ibm-watson-iot
       - node-red/node-red-dashboard
   settings:
     plugin: dump
@@ -44,4 +39,3 @@ parts:
       - .
     filesets:
       all: [ . ]
- 
