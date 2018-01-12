@@ -26,13 +26,14 @@ parts:
       - node-red-node-random
       - node-red-node-smooth
       - node-red-node-ping
-      - node-red/node-red-dashboard
+      - node-red-dashboard
   settings:
     plugin: dump
     source: settings
     filesets:
       settings:
         - .
+      all: [ . ]
     organize:
       start.sh : bin/launch
     prime:
