@@ -38,5 +38,3 @@ parts:
       start.sh : bin/launch
     prime:
       - .
-    filesets:
-      all: [ . ]
