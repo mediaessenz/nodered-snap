@@ -17,7 +17,7 @@ apps:
 parts:
   red:
     plugin: nodejs
-    node-engine: 6.12.3
+    node-engine: 8
     stage-packages:
       - gnustep-gui-runtime
       - python
