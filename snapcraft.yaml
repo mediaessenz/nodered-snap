@@ -37,4 +37,4 @@ parts:
     organize:
       start.sh : bin/launch
     prime:
-      - .
+      - . 
