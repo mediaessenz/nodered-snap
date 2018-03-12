@@ -5,4 +5,4 @@ sudo apt -y install g++ make python libbluetooth-dev libudev-dev snapd snapcraft
 
 snapcraft clean
 snapcraft
-snapcraft release node-red 17.5 stable
+snapcraft release node-red 0.18.4 stable
