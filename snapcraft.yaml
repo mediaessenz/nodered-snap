@@ -20,6 +20,7 @@ parts:
     plugin: nodejs
     node-engine: 8.11.4
     stage-packages:
+      - libc6
       - gnustep-gui-runtime
       - python
     node-packages:
