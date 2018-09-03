@@ -7,9 +7,9 @@ grade: stable
 
 apps:
   node-red:
-    command: bin/launch
+    command: bin/startNR
     daemon: simple
-    restart-condition: always
+    restart-condition: on-failure
     plugs:
       - home
       - network-bind
@@ -36,6 +36,6 @@ parts:
         - .
       all: [ . ]
     organize:
-      start.sh : bin/launch
+      start.sh : bin/startNR
     prime:
       - .
