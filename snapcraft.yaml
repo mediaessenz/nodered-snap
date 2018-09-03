@@ -28,7 +28,6 @@ parts:
       - node-red-node-smooth
       - node-red-node-ping
       - node-red-node-rbe
-      - node-red-dashboard
   settings:
     plugin: dump
     source: settings
