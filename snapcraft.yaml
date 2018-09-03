@@ -9,6 +9,7 @@ apps:
   node-red:
     command: bin/launch
     daemon: simple
+    restart-condition: always
     plugs:
       - home
       - network-bind
