@@ -1,8 +1,10 @@
 #!/bin/sh
 
-# sudo apt update
-# sudo apt -y install g++ make python libbluetooth-dev libudev-dev snapd snapcraft
+# sudo snap install lxd && sudo lxd init        # if you don’t have LXD already
+# sudo usermod -a -G lxd $USER && newgrp lxd    # if your user is not in the lxd group already
+# sudo snap install --classic snapcraft         # if you don’t have snapcraft already
 
-snapcraft clean
-snapcraft --debug
-snapcraft release node-red 0.19.2 stable
+rm node-red*.snap
+snapcraft cleanbuild --debug
+# snapcraft release node-red 0.19.2 stable,beta,edge
+snapcraft push node-red*.snap --release stable
