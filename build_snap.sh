@@ -6,5 +6,5 @@
 
 rm node-red*.snap
 snapcraft cleanbuild --debug
-# snapcraft release node-red 0.19.2 stable,beta,edge
+# snapcraft release node-red 0.19.5 stable,beta,edge
 snapcraft push node-red*.snap --release stable
