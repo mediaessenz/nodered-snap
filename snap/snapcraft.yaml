@@ -32,7 +32,6 @@ parts:
     npm-flags:
       - --unsafe-perm
     stage-packages:
-      - gnustep-gui-runtime
       - python
     node-packages:
       - node-red
@@ -43,11 +42,5 @@ parts:
   settings:
     plugin: dump
     source: settings
-    filesets:
-      settings:
-        - .
-      all: [ . ]
     organize:
       start.sh : bin/startNR
-    prime:
-      - .
