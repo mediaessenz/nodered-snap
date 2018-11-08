@@ -22,11 +22,15 @@ apps:
       - pulseaudio
       - removable-media
       - serial-port
+  npm:
+    command: bin/npm
 
 parts:
   red:
     plugin: nodejs
     node-engine: 8.12.0
+    npm-flags:
+      - --unsafe-perm
     stage-packages:
       - gnustep-gui-runtime
       - python
