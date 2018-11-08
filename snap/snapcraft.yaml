@@ -24,6 +24,9 @@ apps:
       - serial-port
   npm:
     command: bin/npm
+    plugs:
+      - home
+      - network
 
 parts:
   red:
