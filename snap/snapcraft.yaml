@@ -36,10 +36,11 @@ parts:
       - python
     node-packages:
       - node-red
-      - node-red-node-random
-      - node-red-node-smooth
       - node-red-node-ping
+      - node-red-node-random
       - node-red-node-rbe
+      - node-red-node-serialport
+      - node-red-node-smooth
   settings:
     plugin: dump
     source: settings
