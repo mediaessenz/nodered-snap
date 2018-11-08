@@ -13,10 +13,16 @@ apps:
     plugs:
       - bluez
       - bluetooth-control
+      - camera
+      - gpio
       - home
       - network-bind
       - network
       - network-observe
+      - pulseaudio
+      - removable-media
+      - serial-port
+
 parts:
   red:
     plugin: nodejs
