@@ -11,6 +11,8 @@ apps:
     daemon: simple
     restart-condition: on-failure
     plugs:
+      - bluez
+      - bluetooth-control
       - home
       - network-bind
       - network
