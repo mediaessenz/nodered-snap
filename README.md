@@ -5,7 +5,7 @@
 Base version of the Node-RED internet of things graphical wiring tool
 packaged as an Ubuntu Snap, intended for multiple architectures.
 
-Listens on port 1880 by default
+Listens on port 1880 by default.
 
 #### Building
 
@@ -13,7 +13,7 @@ To build locally, modify the snapcraft.yaml as required, and then execute `build
 
 #### Installing
 
-    sudo snap install node-red
+    snap install node-red
 
 When the snap is running you can view the Node-RED log using
 

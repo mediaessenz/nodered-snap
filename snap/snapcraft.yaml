@@ -38,12 +38,13 @@ parts:
 
   node-red:
     plugin: nodejs
-    node-engine: 8.11.2
+    node-engine: 8.12.0
     npm-flags:
       - --unsafe-perm
     stage-packages:
       - python
     node-packages:
+      - npm
       - node-red
       - node-red-node-ping
       - node-red-node-random
