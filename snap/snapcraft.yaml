@@ -44,6 +44,7 @@ parts:
       - --unsafe-perm
     stage-packages:
       - python
+      - iputils-ping
     node-packages:
       - npm
       - node-red
