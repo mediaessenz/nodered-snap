@@ -4,7 +4,7 @@ summary: A visual tool for wiring the Internet of Things
 description: >
   Node-RED is a flow based programming application for wiring together hardware
   devices, APIs and online services in new and interesting ways. For more
-  information see http://nodered.org 
+  information see http://nodered.org
 
 confinement: strict
 grade: stable
@@ -39,7 +39,7 @@ parts:
 
   node-red:
     plugin: nodejs
-    node-engine: 8.12.0
+    node-engine: 8.14.0
     npm-flags:
       - --unsafe-perm
     stage-packages:
@@ -47,7 +47,6 @@ parts:
     node-packages:
       - npm
       - node-red
-      - node-red-node-ping
       - node-red-node-random
       - node-red-node-rbe
       - node-red-node-serialport
