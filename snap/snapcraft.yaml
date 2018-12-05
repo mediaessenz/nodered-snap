@@ -36,7 +36,7 @@ parts:
   node-red-git:
     plugin: nil
     source: https://github.com/node-red/node-red.git
-
+ 
   node-red:
     plugin: nodejs
     node-engine: 8.14.0
