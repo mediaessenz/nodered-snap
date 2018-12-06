@@ -6,4 +6,4 @@
 
 rm -f node-red*.snap
 snapcraft cleanbuild --debug
-#snapcraft push node-red*.snap --release beta
+# snapcraft push node-red*.snap --release beta  # push this build to the beta channel

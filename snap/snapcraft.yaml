@@ -31,12 +31,16 @@ apps:
     plugs:
       - home
       - network
+  ping:
+    command: /bin/ping
+    plugs:
+      - network-observe
 
 parts:
   node-red-git:
     plugin: nil
     source: https://github.com/node-red/node-red.git
- 
+
   node-red:
     plugin: nodejs
     node-engine: 8.14.0
@@ -44,7 +48,6 @@ parts:
       - --unsafe-perm
     stage-packages:
       - python
-      - iputils-ping
     node-packages:
       - npm
       - node-red

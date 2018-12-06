@@ -9,9 +9,9 @@ Listens on port 1880 by default.
 
 #### Gotchas
 
-**Note**: the strict containerisation when running as a snap means that any nodes that try to shell out or spawn other commands (e.g. exec, ping, etc) will fail as they will not have access to system resources.
+**Note**: the strict containerisation when running as a snap means that any nodes that try to shell out or spawn other commands (e.g. exec) will fail as they will not have access to system resources.
 
-You can install the snap in `--classic` mode but this is not advised. You do so at your own risk, etc.
+You can get relax this by installing the snap in `--classic` mode but this is not advised. You do so at your own risk, etc.
 
 #### Building
 
