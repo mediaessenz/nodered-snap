@@ -31,10 +31,6 @@ apps:
     plugs:
       - home
       - network
-  ping:
-    command: /bin/ping
-    plugs:
-      - network-observe
 
 parts:
   node-red-git:
@@ -51,7 +47,6 @@ parts:
     node-packages:
       - npm
       - node-red
-      - node-red-node-ping
       - node-red-node-random
       - node-red-node-rbe
       - node-red-node-serialport
