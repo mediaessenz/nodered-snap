@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 if [ -z "$PORT" ]; then PORT=1880; fi
-export $PORT
+export PORT
 if [ ! -f $SNAP_USER_DATA/settings.js ]; then
     echo "NEW - Copy settings.js to "$SNAP_USER_DATA
     cp $SNAP/lib/node_modules/node-red/settings.js $SNAP_USER_DATA/
