@@ -9,9 +9,14 @@ Listens on port 1880 by default.
 
 #### Gotchas
 
-**Note**: the strict containerisation when running as a snap means that any nodes that try to shell out or spawn other commands (e.g. exec) will fail as they will not have access to system resources.
+**Note**: the strict containerisation when running as a snap means that any nodes that try to shell out or spawn other commands (e.g. exec) will probably fail as they will not have access to system resources.
 
-You can get relax this by installing the snap in `--classic` mode but this is not advised. You do so at your own risk, etc.
+You can relax this by installing the snap in `--classic` mode but this is not advised. You do so at your own risk, etc.
+
+**ping**: If you want to use the ping node you must manually connect the network-observe interface.
+
+    sudo snap connect node-red:network-observe
+
 
 #### Building
 
@@ -33,8 +38,13 @@ You can also stop and restart the application by
 Currently the ONLY serial support is for /dev/ttyS0 style ports.
 USB serial ports (hot-pluggable) are not supported by Snappy yet.
 
-#### Settings
+#### Configuration
 
 The **settings.js** and **flows.json** file are located in the `/root/snap/node-red/current/` directory.
+
+To install any extra nodes via command line you can (as root user)
+
+    cd ~/snap/node-red/current/
+    node-red.npm i node-red-contrib-my-great-node-name
 
 The base port can be set by the `$PORT` environment variable, or in the `settings.js` file.

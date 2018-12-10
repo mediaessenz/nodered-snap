@@ -47,6 +47,7 @@ parts:
     node-packages:
       - npm
       - node-red
+      - node-red-node-ping
       - node-red-node-random
       - node-red-node-rbe
       - node-red-node-serialport
