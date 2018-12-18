@@ -31,6 +31,10 @@ apps:
     plugs:
       - home
       - network
+  desktop-launch:
+    command: bin/desktop-launch
+    plugs:
+      - desktop
 
 parts:
   node-red-git:
@@ -60,4 +64,5 @@ parts:
     plugin: dump
     source: settings
     organize:
-      start.sh : bin/startNR
+      start.sh: bin/startNR
+      desktop-launch: bin/desktop-launch

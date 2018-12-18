@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Node-RED
+Comment=Flow-based programming for the Internet of Things
+Exec=node-red.desktop-launch
+Icon=${SNAP}/meta/gui/node-red.png
+Terminal=false
+Categories=Development;
