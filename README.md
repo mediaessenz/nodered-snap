@@ -42,9 +42,12 @@ USB serial ports (hot-pluggable) are not supported by Snappy yet.
 
 The **settings.js** and **flows.json** file are located in the `/root/snap/node-red/current/` directory.
 
-To install any extra nodes via command line you can (as root user)
+To install any extra nodes, the best option is to use the Manage Palette option in the editor.
+To install via the command line you can
 
+    sudo su -
     cd ~/snap/node-red/current/
-    node-red.npm i node-red-contrib-my-great-node-name
+    node-red.npm i --unsafe-perm node-red-contrib-my-great-node-name
+    snap restart node-red
 
 The base port can be set by the `$PORT` environment variable, or in the `settings.js` file.
