@@ -43,7 +43,7 @@ parts:
 
   node-red:
     plugin: nodejs
-    node-engine: 10.15.1
+    node-engine: 10.14.2
     npm-flags:
       - --unsafe-perm
     stage-packages:
