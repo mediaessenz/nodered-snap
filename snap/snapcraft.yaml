@@ -55,7 +55,6 @@ parts:
       - node-red-node-random
       - node-red-node-rbe
       - node-red-node-serialport
-      - node-red-node-smooth
     override-build: |
       snapcraftctl build
       VER=$(npm show node-red version)
