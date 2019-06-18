@@ -59,6 +59,8 @@ parts:
       snapcraftctl build
       VER=$(npm show node-red version)
       snapcraftctl set-version $VER
+    prime:
+      - -lib/node_modules/node-red/node_modules/tar/lib/.mkdir.js.swp
   settings:
     plugin: dump
     source: settings
