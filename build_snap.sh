@@ -5,5 +5,6 @@
 # sudo snap install --classic snapcraft         # if you don’t have snapcraft already
 
 rm -f node-red*.snap
-snapcraft cleanbuild --debug
+snapcraft clean
+snapcraft
 # snapcraft push node-red*.snap --release beta  # push this build to the beta channel
