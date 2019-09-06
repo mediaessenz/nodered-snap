@@ -41,7 +41,7 @@ parts:
   node-red:
     plugin: nodejs
     after: [node-red-git]
-    node-version: 10.16.3
+    nodejs-version: 10.16.3
     stage-packages:
       - python
     override-build: |
