@@ -1,12 +1,10 @@
 name: node-red
 adopt-info: node-red
 summary: A visual tool for wiring the Internet of Things
-description: >
-  Node-RED is a flow based programming application for wiring together hardware
-  devices, APIs and online services in new and interesting ways. For more
-  information see http://nodered.org
+description: Node-RED is a flow based programming application for wiring together hardware devices, APIs and online services in new and interesting ways. For more information see http://nodered.org
 confinement: strict
 grade: stable
+base: core18
 
 apps:
   node-red:
@@ -43,7 +41,7 @@ parts:
   node-red:
     plugin: nodejs
     after: [node-red-git]
-    node-engine: 8.16.0
+    node-engine: 10.16.1
     npm-flags:
       - --unsafe-perm
     stage-packages:
