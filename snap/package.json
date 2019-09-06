@@ -1,0 +1,29 @@
+{
+    "name": "node-red-snap",
+    "version": "0.20.7",
+    "description": "Node-RED Snap for Ubuntu",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dceejay/nodered.snap.git"
+    },
+    "dependencies": {
+        "node-red": "0.20.8",
+        "node-red-node-ping": "*",
+        "node-red-node-random": "*",
+        "node-red-node-rbe": "*",
+        "node-red-node-random": "*",
+        "node-red-node-serialport": "~0.8.6"
+    },
+    "keywords": [
+        "snap",
+        "quick start",
+        "node-red"
+    ],
+    "author": [
+        {
+            "name": "Dave Conway-Jones"
+        }
+    ],
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/dceejay/nodered.snap#readme"
+}

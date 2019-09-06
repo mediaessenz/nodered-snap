@@ -41,18 +41,9 @@ parts:
   node-red:
     plugin: nodejs
     after: [node-red-git]
-    node-engine: 10.16.1
-    npm-flags:
-      - --unsafe-perm
+    node-version: 10.16.1
     stage-packages:
       - python
-    node-packages:
-      - npm
-      - node-red
-      - node-red-node-ping
-      - node-red-node-random
-      - node-red-node-rbe
-      - node-red-node-serialport
     override-build: |
       snapcraftctl build
       VER=$(npm show node-red version)
