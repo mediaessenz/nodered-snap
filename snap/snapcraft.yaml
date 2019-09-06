@@ -5,6 +5,9 @@ description: Node-RED is a flow based programming application for wiring togethe
 confinement: strict
 grade: stable
 base: core18
+environment:
+  npm_config_unsafe_perm: "true"
+  NODE_ENV: "production"
 
 apps:
   node-red:
