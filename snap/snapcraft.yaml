@@ -34,13 +34,13 @@ apps:
       - desktop
 
 parts:
-  node-red-git:
-    plugin: nil
-    source: https://github.com/node-red/node-red.git
+  # node-red-git:
+  #   plugin: nil
+  #   source: https://github.com/node-red/node-red.git
 
   node-red:
     plugin: nodejs
-    after: [node-red-git]
+    # after: [node-red-git]
     nodejs-version: 10.16.3
     nodejs-package-manager: npm
     source: .
