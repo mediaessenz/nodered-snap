@@ -1,6 +1,6 @@
 {
     "name": "node-red-snap",
-    "version": "0.20.7",
+    "version": "0.20.8",
     "description": "Node-RED Snap for Ubuntu",
     "repository": {
         "type": "git",
@@ -12,7 +12,7 @@
         "node-red-node-random": "*",
         "node-red-node-rbe": "*",
         "node-red-node-random": "*",
-        "node-red-node-serialport": "~0.8.6"
+        "node-red-node-serialport": "*"
     },
     "keywords": [
         "snap",
