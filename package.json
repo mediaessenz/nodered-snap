@@ -12,7 +12,8 @@
         "node-red-node-random": "*",
         "node-red-node-rbe": "*",
         "node-red-node-random": "*",
-        "node-red-node-serialport": "*"
+        "node-red-node-serialport": "*",
+        "npm": "*"
     },
     "keywords": [
         "snap",
