@@ -51,6 +51,9 @@ parts:
     stage-packages:
       - python
       - build-essential
+    build-packages:
+      - python
+      - build-essential
     override-build: |
       snapcraftctl build
       VER=$(npm show node-red version)
