@@ -1,9 +1,14 @@
 name: node-red
 adopt-info: node-red
-summary: A visual tool for wiring the Internet of Things
+summary: A Lo-Code visual tool for wiring the Internet of Things.
 description: Node-RED is a flow based programming application for wiring together hardware devices, APIs and online services in new and interesting ways. For more information see http://nodered.org
 confinement: strict
 grade: stable
+base: core18
+license: Apache-v2
+environment:
+  npm_config_unsafe_perm: "true"
+  NODE_ENV: "production"
 
 apps:
   node-red:
@@ -33,25 +38,22 @@ apps:
       - desktop
 
 parts:
-  node-red-git:
-    plugin: nil
-    source: https://github.com/node-red/node-red.git
+  # node-red-git:
+  #   plugin: nil
+  #   source: https://github.com/node-red/node-red.git
 
   node-red:
     plugin: nodejs
-    after: [node-red-git]
-    node-engine: 8.16.1
-    npm-flags:
-      - --unsafe-perm
+    # after: [node-red-git]
+    nodejs-version: 10.16.3
+    nodejs-package-manager: npm
+    source: .
     stage-packages:
       - python
-    node-packages:
-      - npm
-      - node-red
-      - node-red-node-ping
-      - node-red-node-random
-      - node-red-node-rbe
-      - node-red-node-serialport
+      - build-essential
+    build-packages:
+      - python
+      - build-essential
     override-build: |
       snapcraftctl build
       VER=$(npm show node-red version)
