@@ -59,6 +59,9 @@ parts:
     prime:
       - -lib/node_modules/node-red/node_modules/tar/lib/.mkdir.js.swp
       - -lib/node_modules/node-red/node_modules/semver/bin/.semver.js.swp
+      - -lib/node_modules/node-red-snap/node_modules/semver/bin/.semver.js.swp
+      - -lib/node_modules/node-red-snap/node_modules/tar/lib/.mkdir.js.swp
+      - -lint-snap-v2_iffy_files
   settings:
     plugin: dump
     source: settings
