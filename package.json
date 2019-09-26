@@ -1,7 +1,7 @@
 {
     "name": "node-red-snap",
     "version": "0.20.8",
-    "description": "Node-RED Snap for Ubuntu",
+    "description": "Node-RED Snap for Ubuntu and other Snap enabled platforms.",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/dceejay/nodered.snap.git"
