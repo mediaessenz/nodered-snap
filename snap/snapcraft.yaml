@@ -41,8 +41,8 @@ apps:
     plugs:
       - desktop
 
-parts:   
-  node: # We dump in a specific version of node/npm from upstream. 
+parts:
+  node: # We dump in a specific version of node/npm from upstream.
     plugin: dump
     source:
       - on amd64: https://nodejs.org/dist/v8.16.1/node-v8.16.1-linux-x64.tar.gz
@@ -68,6 +68,7 @@ parts:
       - -lib/node_modules/node-red/node_modules/semver/bin/.semver.js.swp
       - -lib/node_modules/node-red-snap/node_modules/semver/bin/.semver.js.swp
       - -lib/node_modules/node-red-snap/node_modules/tar/lib/.mkdir.js.swp
+      - -lib/node_modules/semver/bin/.semver.js.swp
       - -lint-snap-v2_iffy_files
   settings:
     plugin: dump
