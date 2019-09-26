@@ -7,6 +7,8 @@ packaged as an Ubuntu Snap, intended for multiple architectures.
 
 Listens on port 1880 by default.
 
+Now based on Core18.
+
 #### Gotchas
 
 **Note**: the strict containerisation when running as a snap means that any nodes that try to shell out or spawn other commands (e.g. exec) will probably fail as they will not have access to system resources.
