@@ -7,7 +7,7 @@
         "url": "git+https://github.com/dceejay/nodered.snap.git"
     },
     "dependencies": {
-        "node-red": "0.20.8",
+        "node-red": "1.0.0-beta.4",
         "node-red-node-ping": "*",
         "node-red-node-random": "*",
         "node-red-node-rbe": "*",
