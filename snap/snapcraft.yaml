@@ -61,16 +61,32 @@ parts:
       npm config set unsafe-perm True
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib node-red@1.0.0-beta.4 node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport
+      find $SNAPCRAFT_PART_INSTALL -type f -name '*.js.swp' -delete
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name test -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name doc -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name example* -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name sample -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname benchmark* -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname .nyc_output -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname unpacked -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name man* -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name tst -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname demo -exec rm -r {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name bench.gnu -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name .npmignore -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name .travis.yml -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name .jshintrc -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname README.md -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname HISTORY.md -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname CONTRIBUTING.md -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname CHANGE*.md -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname .gitmodules -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname .gitattributes -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname .gitignore -exec rm {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname "*~" -exec rm {} \;
       # VER=$(npm show node-red version)
       VER=1.0.0-beta.4
       snapcraftctl set-version $VER
-    prime:
-      - -lib/node_modules/node-red/node_modules/tar/lib/.mkdir.js.swp
-      - -lib/node_modules/node-red/node_modules/semver/bin/.semver.js.swp
-      - -lib/node_modules/node-red-snap/node_modules/semver/bin/.semver.js.swp
-      - -lib/node_modules/node-red-snap/node_modules/tar/lib/.mkdir.js.swp
-      - -lib/node_modules/semver/bin/.semver.js.swp
-      - -lint-snap-v2_iffy_files
   settings:
     plugin: dump
     source: snap/local/settings # snapcraft now prefers local parts to be in snap/local
