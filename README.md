@@ -2,12 +2,10 @@
 
 ### Node-RED snap package
 
-Base version of the Node-RED internet of things graphical wiring tool
+Core18 based version of the Node-RED internet of things graphical wiring tool
 packaged as an Ubuntu Snap, intended for multiple architectures.
 
 Listens on port 1880 by default.
-
-Now based on Core18.
 
 #### Gotchas
 
@@ -38,11 +36,12 @@ You can also stop and restart the application by
     snap enable node-red
 
 Currently the ONLY serial support is for /dev/ttyS0 style ports.
-USB serial ports (hot-pluggable) are not supported by Snappy yet.
+USB serial ports (hot-pluggable) are not yet supported by Snap.
 
 #### Configuration
 
 The **settings.js** and **flows.json** file are located in the `/root/snap/node-red/current/` directory.
+This is a linked directory so if you refresh or update the Node-RED install you will need to copy the files across from the old version to the new current directory.
 
 To install any extra nodes, the best option is to use the Manage Palette option in the editor.
 To install via the command line you can
