@@ -85,8 +85,11 @@ parts:
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname .gitignore -exec rm -f {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname "*~" -exec rm -f {} \;
       # VER=$(npm show node-red version)
-      # VER=1.0.0-beta.4
-      VER=$(cd $SNAPCRAFT_PART_INSTALL/lib/node_modules && npm list -g --depth=0 node-red | grep node-red | cut -d "@" -f 2)
+      VER=$(npm list -g --depth=0 node-red | grep node-red | cut -d "@" -f 2)
+      echo "Setting version1 to $VER"
+      VER=$(npm list --depth=0 node-red | grep node-red | cut -d "@" -f 2)
+      echo "Setting version2 to $VER"
+      VER=1.0.0-beta.4
       snapcraftctl set-version $VER
   settings:
     plugin: dump
