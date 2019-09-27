@@ -61,7 +61,8 @@ parts:
       npm config set unsafe-perm True
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib node-red@1.0.0-beta.4 node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport
-      VER=$(npm show node-red version)
+      # VER=$(npm show node-red version)
+      VER=1.0.0-beta.4
       snapcraftctl set-version $VER
     prime:
       - -lib/node_modules/node-red/node_modules/tar/lib/.mkdir.js.swp

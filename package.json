@@ -15,9 +15,9 @@
         "node-red-node-serialport": "*"
     },
     "keywords": [
+        "node-red",
         "snap",
-        "quick start",
-        "node-red"
+        "quick start"
     ],
     "author": [
         {
