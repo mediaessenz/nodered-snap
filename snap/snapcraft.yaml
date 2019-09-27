@@ -62,16 +62,16 @@ parts:
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib node-red@1.0.0-beta.4 node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport
       find $SNAPCRAFT_PART_INSTALL -type f -name '*.js.swp' -delete
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name test -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name doc -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name example* -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name sample -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname benchmark* -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname .nyc_output -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname unpacked -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name man* -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name tst -exec rm -rf {} \;
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname demo -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name test -prune -exec rm -rf {} \; || true
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name doc -prune -exec rm -rf {} \; || true
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name example* -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name sample -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname benchmark* -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname .nyc_output -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname unpacked -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name man* -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name tst -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname demo -prune -exec rm -rf {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name bench.gnu -exec rm -f {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name .npmignore -exec rm -f {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name .travis.yml -exec rm -f {} \;
