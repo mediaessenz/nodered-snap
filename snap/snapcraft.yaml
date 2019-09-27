@@ -59,11 +59,11 @@ parts:
     override-build: | # Whatever steps needed to install node-red into the install folder, which gets incorporated into the snap
       PATH=$PATH:../npm/bin
       npm config set unsafe-perm True
-      npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
+      # npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib node-red@1.0.0-beta.4 node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport
       find $SNAPCRAFT_PART_INSTALL -type f -name '*.js.swp' -delete
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name test -prune -exec rm -rf {} \; || true
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name doc -prune -exec rm -rf {} \; || true
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name test -prune -exec rm -rf {} \;
+      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name doc -prune -exec rm -rf {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name example* -prune -exec rm -rf {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name sample -prune -exec rm -rf {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname benchmark* -prune -exec rm -rf {} \;
@@ -85,7 +85,8 @@ parts:
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname .gitignore -exec rm -f {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname "*~" -exec rm -f {} \;
       # VER=$(npm show node-red version)
-      VER=1.0.0-beta.4
+      # VER=1.0.0-beta.4
+      VER=$(cd $SNAPCRAFT_PART_INSTALL/lib/node_modules && npm list -g --depth=0 node-red | grep node-red | cut -d "@" -f 2)
       snapcraftctl set-version $VER
   settings:
     plugin: dump

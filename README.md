@@ -9,7 +9,13 @@ Listens on port 1880 by default.
 
 #### Gotchas
 
-**Note**: the strict containerisation when running as a snap means that any nodes that try to shell out or spawn other commands (e.g. exec) will probably fail as they will not have access to system resources.
+When installed as a Snap package, it will run in a secure container that does
+not have access to any external facilities that may be needed for you to use, such as:
+
+ - `gcc` - needed to compile any binary components of nodes you want to install
+ - `git` - needed if you want to use the Projects feature
+ - direct access to gpio hardware
+ - access to any external commands your flows want to use with the Exec node (for example).
 
 You can relax this by installing the snap in `--classic` mode but this is not advised. You do so at your own risk, etc.
 
@@ -17,10 +23,6 @@ You can relax this by installing the snap in `--classic` mode but this is not ad
 
     sudo snap connect node-red:network-observe
 
-
-#### Building
-
-To build locally, modify the snapcraft.yaml as required, and then execute `build_snap.sh`
 
 #### Installing
 
@@ -51,3 +53,8 @@ To install via the command line you can
     snap restart node-red
 
 The base port can be set by the `$PORT` environment variable, or in the `settings.js` file.
+
+
+#### Building
+
+To re-build locally, modify the snapcraft.yaml as required, and then execute `build_snap.sh`
