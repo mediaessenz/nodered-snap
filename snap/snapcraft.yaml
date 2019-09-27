@@ -85,10 +85,10 @@ parts:
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname .gitignore -exec rm -f {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname "*~" -exec rm -f {} \;
       # VER=$(npm show node-red version)
-      VER=$(npm list -g --depth=0 node-red | grep node-red | cut -d "@" -f 2)
-      echo "Setting version1 to $VER"
-      VER=$(npm list --depth=0 node-red | grep node-red | cut -d "@" -f 2)
-      echo "Setting version2 to $VER"
+      V1=$(npm list -g --depth=0 node-red | grep node-red | cut -d "@" -f 2)
+      echo "Setting version1 to $V1"
+      V2=$(npm list --depth=0 node-red | grep node-red | cut -d "@" -f 2)
+      echo "Setting version2 to $V2"
       VER=1.0.0-beta.4
       snapcraftctl set-version $VER
   settings:
