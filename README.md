@@ -7,6 +7,7 @@ packaged as an Ubuntu Snap, intended for multiple architectures.
 
 Listens on port 1880 by default.
 
+
 #### Gotchas
 
 When installed as a Snap package, it will run in a secure container that does
@@ -39,6 +40,7 @@ You can also stop and restart the application by
 
 Currently the ONLY serial support is for /dev/ttyS0 style ports.
 USB serial ports (hot-pluggable) are not yet supported by Snap.
+
 
 #### Configuration
 
