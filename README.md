@@ -1,24 +1,23 @@
-# node-red.snap
+# Node-RED Snap package
 
-### Node-RED snap package
+The Node-RED graphical wiring tool for Low-code programming of event-driven applications.
+Packaged as a Core18 based Ubuntu Snap, intended for multiple architectures.
 
-Core18 based version of the Node-RED internet of things graphical wiring tool
-packaged as an Ubuntu Snap, intended for multiple architectures.
-
-Listens on port 1880 by default.
-
+Listens on port 1880 and runs as as service in strict mode by default.
 
 #### Gotchas
 
 When installed as a Snap package, it will run in a secure container that does
 not have access to any external facilities that may be needed for you to use, such as:
 
+ - access to the main system storage/disk
  - `gcc` - needed to compile any binary components of nodes you want to install
  - `git` - needed if you want to use the Projects feature
  - direct access to gpio hardware
  - access to any external commands your flows want to use with the Exec node (for example).
 
-You can relax this by installing the snap in `--classic` mode but this is not advised. You do so at your own risk, etc.
+You can relax this by installing the snap in `--classic` mode but this is not advised. 
+You do so at your own risk, etc.
 
 **ping**: If you want to use the ping node you must manually connect the network-observe interface.
 
@@ -45,6 +44,8 @@ USB serial ports (hot-pluggable) are not yet supported by Snap.
 #### Configuration
 
 The **settings.js** and **flows.json** file are located in the `/root/snap/node-red/current/` directory.
+If you do need to read and write files - this is the only directory path you will have access to from outside
+the secure container.
 
 To install any extra nodes, the best option is to use the Manage Palette option in the editor.
 To install via the command line you can
