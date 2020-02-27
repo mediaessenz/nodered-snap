@@ -45,10 +45,10 @@ parts:
   node: # We dump in a specific version of node/npm from upstream.
     plugin: dump
     source:
-      - on amd64: https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-x64.tar.gz
-      - on armhf: https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-armv7l.tar.gz
-      - on arm64: https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-arm64.tar.gz
-      - on s390x: https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-s390x.tar.gz
+      - on amd64: https://nodejs.org/dist/v10.19.0/node-v10.19.0-linux-x64.tar.gz
+      - on armhf: https://nodejs.org/dist/v10.19.0/node-v10.19.0-linux-armv7l.tar.gz
+      - on arm64: https://nodejs.org/dist/v10.19.0/node-v10.19.0-linux-arm64.tar.gz
+      - on s390x: https://nodejs.org/dist/v10.19.0/node-v10.19.0-linux-s390x.tar.gz
   node-red:
     after: [node]
     plugin: nil # We use the nil plugin so we can fully override the build with whatever we need to do
@@ -57,6 +57,7 @@ parts:
       - python
     override-build: | # Whatever steps needed to install node-red into the install folder, which gets incorporated into the snap
       PATH=$PATH:../npm/bin
+      apt-get install libatomic1
       npm config set unsafe-perm True
       # npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib node-red node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport
