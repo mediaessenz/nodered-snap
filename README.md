@@ -9,19 +9,20 @@ Listens on port 1880 and runs as as service in strict mode by default.
 
 By default builds get automatically placed in the edge channel, and then promoted to the stable channel manually.
 
-#### Gotchas
+### Restrictions
 
 When installed as a Snap package, it will run in a secure container that does
 not have access to any external facilities that may be needed for you to use, such as:
 
+ - You cannot install extra nodes that require natively compiled code as the build tools are not built in.
+ - You cannot use projects mode as that requires comman line access to git and that is also not built in.
  - access to the main system storage/disk
  - `gcc` - needed to compile any binary components of nodes you want to install
  - `git` - needed if you want to use the Projects feature
  - direct access to gpio hardware
  - access to any external commands your flows want to use with the Exec node (for example).
 
-You can relax this by installing the snap in `--classic` mode but this is not advised. 
-You do so at your own risk, etc.
+You may be able relax this by installing the snap in `--classic` mode but this is not advised, and Canonical have tightened the scope recently and this may no longer be possible unless in development mode.
 
 **ping**: If you want to use the ping node you must manually connect the network-observe interface.
 
