@@ -53,6 +53,8 @@ The **settings.js** and **flows.json** file are located in the `/root/snap/node-
 If you do need to read and write files - this is the only directory path you will have access to from outside
 the secure container.
 
+**Note:** The path to the flows file is currently fixed to `flows.json` in [start.sh](nodered.snap/blob/master/snap/local/settings/start.sh) and therefore cannot be changed in `settings.js`.
+
 To install any extra nodes, the best option is to use the Manage Palette option in the editor.
 To install via the command line you can
 
