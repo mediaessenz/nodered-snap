@@ -28,6 +28,7 @@ apps:
       - gpio-control
       - gpio-memory-control
       - home
+      - i2c
       - network-bind
       - network
       - network-observe
