@@ -25,8 +25,6 @@ apps:
       - bluetooth-control
       - camera
       - gpio
-      - gpio-control
-      - gpio-memory-control
       - home
       - i2c
       - network-bind
