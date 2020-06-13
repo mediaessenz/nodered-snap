@@ -69,9 +69,11 @@ parts:
       npm config set unsafe-perm True
       # npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
       DEFAULT_MODULES="node-red node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport"
-      if [ "$SNAPCRAFT_ARCH_TRIPLET" = "arm-linux-gnueabihf" ]; then
+      if [ "$SNAPCRAFT_ARCH_TRIPLET" = "arm-linux-gnueabihf" ] || \
+           [ "$SNAPCRAFT_ARCH_TRIPLET" = "aarch64-linux-gnu" ]; then
         # Add raspeberry pi and beaglebone modules
-        DEFAULT_MODULES="$DEFAULT_MODULES node-red-node-pi-gpio node-red-contrib-play-audio node-red-node-smooth node-red-contrib-gpio node-red-contrib-i2c node-red-dashboard"
+        echo "adding node modules for $SNAPCRAFT_ARCH_TRIPLET"
+        DEFAULT_MODULES="$DEFAULT_MODULES node-red-node-pi-gpio node-red-contrib-play-audio node-red-node-smooth node-red-contrib-gpio node-red-contrib-i2c node-red-dashboardi node-red-contrib-bme280-rpi"
       fi
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib $DEFAULT_MODULES
       find $SNAPCRAFT_PART_INSTALL -type f -name '*.js.swp' -delete
