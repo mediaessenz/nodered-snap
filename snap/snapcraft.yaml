@@ -25,6 +25,8 @@ apps:
       - bluetooth-control
       - camera
       - gpio
+      - gpio-control
+      - gpio-memory-control
       - home
       - network-bind
       - network
@@ -57,12 +59,18 @@ parts:
     source: .
     stage-packages:
       - python
+    build-packages:
+      - libatomic1
     override-build: | # Whatever steps needed to install node-red into the install folder, which gets incorporated into the snap
       PATH=$PATH:../npm/bin
-      apt-get install libatomic1
       npm config set unsafe-perm True
       # npm install --prefix $SNAPCRAFT_PART_INSTALL/lib
-      npm install --prefix $SNAPCRAFT_PART_INSTALL/lib node-red node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport
+      DEFAULT_MODULES="node-red node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport"
+      if [ "$SNAPCRAFT_ARCH_TRIPLET" = "arm-linux-gnueabihf" ]; then
+        # Add raspeberry pi and beaglebone modules
+        DEFAULT_MODULES="$DEFAULT_MODULES node-red-node-pi-gpio node-red-contrib-play-audio node-red-node-smooth node-red-contrib-gpio"
+      fi
+      npm install --prefix $SNAPCRAFT_PART_INSTALL/lib $DEFAULT_MODULES
       find $SNAPCRAFT_PART_INSTALL -type f -name '*.js.swp' -delete
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name test -prune -exec rm -rf {} \;
       find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name doc -prune -exec rm -rf {} \;
