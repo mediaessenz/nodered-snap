@@ -67,7 +67,7 @@ parts:
       DEFAULT_MODULES="node-red node-red-node-ping node-red-node-random node-red-node-rbe node-red-node-serialport"
       if [ "$SNAPCRAFT_ARCH_TRIPLET" = "arm-linux-gnueabihf" ]; then
         # Add raspeberry pi and beaglebone modules
-        DEFAULT_MODULES="$DEFAULT_MODULES node-red-node-pi-gpio node-red-contrib-play-audio node-red-node-smooth node-red-contrib-gpio"
+        DEFAULT_MODULES="$DEFAULT_MODULES node-red-node-pi-gpio node-red-contrib-play-audio node-red-node-smooth node-red-contrib-gpio node-red-contrib-i2c"
       fi
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib $DEFAULT_MODULES
       find $SNAPCRAFT_PART_INSTALL -type f -name '*.js.swp' -delete
