@@ -29,6 +29,7 @@ apps:
       - bluetooth-control
       - camera
       - gpio
+      - gpio-memory-control
       - hardware-observe
       - home
       - i2c
@@ -51,12 +52,28 @@ apps:
     plugs:
       - desktop
 
+layout:
+  /usr/bin/python:
+    symlink: $SNAP/usr/bin/python
+  /usr/share/doc/python-rpi.gpio: # extremely silly hack, since node-red hardcodes either of two dirs
+    symlink: $SNAP/usr/share/doc/python # (this is one of them) to determine if RPi.GPIO is installed
+
 parts:
+  rpi-gpio:
+    plugin: python
+    python-version: python2
+    python-packages:
+      - RPi.GPIO
+    build-environment:
+      - READTHEDOCS: 'True'
+    stage-packages:
+      - python-minimal
   node-red:
     plugin: nodejs
     nodejs-version: 10.20.1
     nodejs-package-manager: npm
     source: .
+    after: [ rpi-gpio ]
     stage-packages:
       - python
     build-packages:
