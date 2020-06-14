@@ -29,6 +29,7 @@ apps:
       - bluetooth-control
       - camera
       - gpio
+      - hardware-observe
       - home
       - i2c
       - network-bind
@@ -37,7 +38,9 @@ apps:
       - pulseaudio
       - removable-media
       - serial-port
+      - shutdown
       - spi
+      - system-observe
   npm:
     command: bin/npm
     plugs:
