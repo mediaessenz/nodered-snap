@@ -33,6 +33,7 @@ apps:
       - hardware-observe
       - home
       - i2c
+      - iio
       - network-bind
       - network
       - network-observe
@@ -64,10 +65,25 @@ parts:
     python-version: python2
     python-packages:
       - RPi.GPIO
+      - RPi.bme280
+      - Adafruit_Python_DHT
+      - adafruit-mcp3008
+      - mcp3008
     build-environment:
       - READTHEDOCS: 'True'
+    build-packages:
+      - libssl-dev
+      - libffi-dev
+      - python-dev
+      - python-pil
+      - python-smbus
     stage-packages:
+      - i2c-tools
+      - libffi6
+      - libssl1.0.0
       - python-minimal
+      - python-pil
+      - python-smbus
   node-red:
     plugin: nodejs
     nodejs-version: 10.20.1
