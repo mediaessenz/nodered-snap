@@ -37,6 +37,7 @@ apps:
       - network-bind
       - network
       - network-observe
+      - physical-memory-control
       - pulseaudio
       - removable-media
       - serial-port
