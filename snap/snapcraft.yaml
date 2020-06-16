@@ -34,6 +34,7 @@ apps:
       - home
       - i2c
       - iio
+      - login-session-observe
       - mount-observe
       - network-bind
       - network
