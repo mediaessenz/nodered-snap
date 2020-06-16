@@ -70,8 +70,6 @@ parts:
       - Adafruit_Python_DHT
       - adafruit-mcp3008
       - mcp3008
-    build-environment:
-      - READTHEDOCS: 'True'
     build-packages:
       - libssl-dev
       - libffi-dev
@@ -102,10 +100,10 @@ parts:
       # set default modules
       DEFAULT_MODULES="npm node-red node-red-node-ping node-red-node-random node-red-node-rbe \
                        node-red-node-serialport node-red-node-pi-gpio node-red-contrib-play-audio \
-                       node-red-node-smooth node-red-contrib-gpio node-red-contrib-i2c \
-                       node-red-dashboard node-red-contrib-bme280-rpi node-dht-sensor \
-                       node-red-contrib-dht-sensor node-red-contrib-ds18b20-sensor node-red-node-pi-mcp3008 \
-                       node-red-contrib-bme280 node-red-node-pisrf node-red-contrib-easybotics-air-quality \
+                       node-red-node-smooth node-red-contrib-i2c node-red-dashboard \
+                       node-red-contrib-bme280-rpi node-dht-sensor node-red-contrib-dht-sensor \
+                       node-red-contrib-ds18b20-sensor node-red-node-pi-mcp3008 node-red-contrib-bme280 \
+                       node-red-node-pisrf node-red-contrib-easybotics-air-quality \
                        node-red-contrib-sds011 node-red-contrib-oled"
 
       # install
