@@ -59,6 +59,10 @@ layout:
     symlink: $SNAP/usr/bin/python
   /usr/share/doc/python-rpi.gpio: # extremely silly hack, since node-red hardcodes either of two dirs
     symlink: $SNAP/usr/share/doc/python # (this is one of them) to determine if RPi.GPIO is installed
+  /usr/bin/free:
+    symlink: $SNAP/usr/bin/free
+  /usr/bin/top:
+    symlink: $SNAP/usr/bin/top
 
 parts:
   rpi-gpio:
@@ -80,6 +84,7 @@ parts:
       - i2c-tools
       - libffi6
       - libssl1.0.0
+      - procps
       - python-minimal
       - python-pil
       - python-smbus
