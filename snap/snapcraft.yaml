@@ -67,7 +67,7 @@ layout:
     bind-file: $SNAP/usr/bin/top
 
 parts:
-  rpi-gpio:
+  sensor-libs:
     plugin: python
     python-version: python2
     python-packages:
@@ -90,12 +90,22 @@ parts:
       - python-minimal
       - python-pil
       - python-smbus
+    override-pull: |
+      snapcraftctl pull
+      # hack to make adafruit dht lib always buidl for pi(2/3/4)
+      tar xf ../python-packages/Adafruit_Python_DHT-1.4.0.tar.gz
+      plat_detect="Adafruit_Python_DHT-1.4.0/Adafruit_DHT/platform_detect.py"
+      sed -i '/^.*# Handle R.*/a \    return RASPBERRY_PI' $plat_detect
+      sed -i '/^.*# Revision list.*/a \    return 2' $plat_detect
+      sed -i '/^.*# Anything else.*/a \    return 3' $plat_detect
+      tar czf ../python-packages/Adafruit_Python_DHT-1.4.0.tar.gz Adafruit_Python_DHT-1.4.0
+      rm -rf Adafruit_Python_DHT-1.4.0
   node-red:
     plugin: nodejs
     nodejs-version: 10.20.1
     nodejs-package-manager: npm
     source: .
-    after: [ rpi-gpio ]
+    after: [ sensor-libs ]
     stage-packages:
       - python
     build-packages:
@@ -135,7 +145,7 @@ parts:
 
       # set version
       VER=$(npm show node-red version)
-      echo "VERSION $(npm show node-red version)"
+      echo "VERSION $VER"
       snapcraftctl set-version $VER
 
       # copy node
