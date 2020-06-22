@@ -120,8 +120,8 @@ parts:
                        node-red-node-smooth node-red-contrib-i2c node-red-dashboard \
                        node-red-contrib-bme280-rpi node-dht-sensor node-red-contrib-dht-sensor \
                        node-red-contrib-ds18b20-sensor node-red-node-pi-mcp3008 node-red-contrib-bme280 \
-                       node-red-node-pisrf node-red-contrib-easybotics-air-quality \
-                       node-red-contrib-sds011 node-red-contrib-oled node-red-contrib-sunevents"
+                       node-red-contrib-sunevents node-red-node-pisrf node-red-contrib-easybotics-air-quality \
+                       node-red-contrib-sds011 node-red-contrib-oled"
 
       # install
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib $DEFAULT_MODULES
