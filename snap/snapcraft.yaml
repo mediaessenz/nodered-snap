@@ -114,6 +114,8 @@ parts:
       - python
     build-packages:
       - libatomic1
+      - libbluetooth-dev
+      - libudev-dev
     override-build: | # Whatever steps needed to install node-red into the install folder, which gets incorporated into the snap
       PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
       npm config set unsafe-perm True
@@ -126,7 +128,7 @@ parts:
                        node-red-contrib-ds18b20-sensor node-red-node-pi-mcp3008 node-red-contrib-bme280 \
                        node-red-contrib-sunevents node-red-node-pisrf node-red-contrib-easybotics-air-quality \
                        node-red-contrib-camerapi node-red-node-pi-neopixel node-red-contrib-sds011 \
-                       node-red-contrib-generic-ble node-red-contrib-oled"
+                       node-red-contrib-generic-ble noble node-red-contrib-oled"
 
       # install
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib $DEFAULT_MODULES
