@@ -131,7 +131,7 @@ parts:
                        node-red-contrib-ds18b20-sensor node-red-node-pi-mcp3008 node-red-contrib-bme280 \
                        node-red-contrib-sunevents node-red-node-pisrf node-red-contrib-easybotics-air-quality \
                        node-red-contrib-camerapi node-red-node-pi-neopixel node-red-contrib-sds011 \
-                       node-red-contrib-noble node-red-contrib-generic-ble node-red-contrib-oled"
+                       bluetooth-hci-socket node-red-contrib-generic-ble node-red-contrib-oled"
 
       # install
       npm install --prefix $SNAPCRAFT_PART_INSTALL/lib $DEFAULT_MODULES
