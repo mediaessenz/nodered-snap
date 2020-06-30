@@ -111,6 +111,8 @@ parts:
     source: .
     after: [ sensor-libs ]
     stage-packages:
+      - bluetooth
+      - bluez
       - python
     build-packages:
       - libatomic1
