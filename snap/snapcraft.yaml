@@ -113,8 +113,11 @@ parts:
     stage-packages:
       - bluetooth
       - bluez
+      - libbluetooth3
       - python
     build-packages:
+      - bluetooth
+      - bluez
       - libatomic1
       - libbluetooth-dev
       - libudev-dev
