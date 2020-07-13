@@ -20,9 +20,15 @@ architectures:
 
 apps:
   node-red:
-    command: bin/startNR
+    command: node $SNAP/lib/node_modules/node-red/red.js
     daemon: simple
     restart-condition: on-failure
+    environment:
+      NODE_PATH: $SNAP/lib
+      C_INCLUDE_PATH: $SNAP/usr/lib/gcc/$SNAPCRAFT_ARCH_TRIPLET/7/include:$SNAP/usr/lib/gcc/$SNAPCRAFT_ARCH_TRIPLET/7/include-fixed:$SNAP/usr/include/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/include
+      CPLUS_INCLUDE_PATH: $SNAP/usr/include/c++/7:$SNAP/usr/include/$SNAPCRAFT_ARCH_TRIPLET/c++/7:$SNAP/usr/include/c++/7/backward:$SNAP/usr/lib/gcc/$SNAPCRAFT_ARCH_TRIPLET/7/include:$SNAP/usr/lib/gcc/$SNAPCRAFT_ARCH_TRIPLET/7/include-fixed:$SNAP/usr/include/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/include
+      GCC_EXEC_PREFIX: $SNAP/usr/lib/gcc/
+      LIBRARY_PATH: $SNAP/usr/lib/gcc/$SNAPCRAFT_ARCH_TRIPLET/7:$SNAP/usr/lib/gcc/$SNAPCRAFT_ARCH_TRIPLET/7/../../../:$SNAP/lib:$SNAP/usr/lib:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
     plugs:
       - audio-playback
       - bluez
@@ -51,10 +57,6 @@ apps:
     plugs:
       - home
       - network
-  desktop-launch:
-    command: bin/desktop-launch
-    plugs:
-      - desktop
 
 layout:
   /usr/bin/python:
@@ -65,6 +67,10 @@ layout:
     bind-file: $SNAP/usr/bin/free
   /usr/bin/top:
     bind-file: $SNAP/usr/bin/top
+  /usr/lib/arm-linux-gnueabihf/libpthread_nonshared.a:
+    bind-file: $SNAP/usr/lib/arm-linux-gnueabihf/libpthread_nonshared.a
+  /usr/lib/arm-linux-gnueabihf/libc_nonshared.a:
+    bind-file: $SNAP/usr/lib/arm-linux-gnueabihf/libc_nonshared.a
 
 parts:
   sensor-libs:
@@ -96,7 +102,7 @@ parts:
       - python-smbus
     override-pull: |
       snapcraftctl pull
-      # hack to make adafruit dht lib always buidl for pi(2/3/4)
+      # hack to make adafruit dht lib always build for pi(2/3/4)
       tar xf ../python-packages/Adafruit_Python_DHT-1.4.0.tar.gz
       plat_detect="Adafruit_Python_DHT-1.4.0/Adafruit_DHT/platform_detect.py"
       sed -i '/^.*# Handle R.*/a \    return RASPBERRY_PI' $plat_detect
@@ -105,66 +111,73 @@ parts:
       tar czf ../python-packages/Adafruit_Python_DHT-1.4.0.tar.gz Adafruit_Python_DHT-1.4.0
       rm -rf Adafruit_Python_DHT-1.4.0
   node-red:
+    source: https://github.com/node-red/node-red.git
+    source-tag: 1.1.2
     plugin: nodejs
-    nodejs-version: 10.20.1
+    nodejs-version: 10.21.0
     nodejs-package-manager: npm
-    source: .
     after: [ sensor-libs ]
     stage-packages:
       - bluetooth
       - bluez
+      - libatomic1
       - libbluetooth3
+      - libbluetooth-dev
+      - libudev1
+      - libudev-dev
       - python
     build-packages:
+      - build-essential
+      - libkrb5-dev
       - libatomic1
       - libbluetooth-dev
       - libudev-dev
-    override-build: | # Whatever steps needed to install node-red into the install folder, which gets incorporated into the snap
+      - libzmq3-dev
+      - python2.7-minimal
+    override-build: |
       PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
       npm config set unsafe-perm True
 
-      # set default modules
-      DEFAULT_MODULES="npm node-red node-red-node-ping node-red-node-random node-red-node-rbe \
-                       node-red-node-serialport node-red-node-pi-gpio node-red-contrib-play-audio \
-                       node-red-node-smooth node-red-contrib-i2c node-red-dashboard \
-                       node-red-contrib-bme280-rpi node-dht-sensor node-red-contrib-dht-sensor \
-                       node-red-contrib-ds18b20-sensor node-red-node-pi-mcp3008 node-red-contrib-bme280 \
-                       node-red-contrib-sunevents node-red-node-pisrf node-red-contrib-easybotics-air-quality \
-                       node-red-contrib-camerapi node-red-node-pi-neopixel node-red-contrib-sds011 \
-                       @abandonware/bluetooth-hci-socket @abandonware/noble node-red-contrib-generic-ble \
-                       node-red-contrib-oled"
+      # workaround for build.snapcraft.io builds
+      # https://bugs.launchpad.net/bugs/1886861
+      if [ -n "$http_proxy" ]; then
+        export ELECTRON_GET_USE_PROXY=1
+        export GLOBAL_AGENT_HTTP_PROXY="${http_proxy}"
+        export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
+      fi
 
-      # install
-      npm install --prefix $SNAPCRAFT_PART_INSTALL/lib $DEFAULT_MODULES
-
-      # clean up unused cruft
-      echo "cleaning up"
-      find $SNAPCRAFT_PART_INSTALL -type f -name '*.js.swp' -delete
-      for dir in test doc example* tst man* sample; do
-        find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -name $dir -prune -exec rm -rf {} \;
-      done
-      for dir in benchmark* .nyc_output unpacked demo; do
-        find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type d -iname $dir -prune -exec rm -rf {} \;
-      done
-      for file in bench.gnu .npmignore .travis.yml .jshintrc; do
-        find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -name $file -exec rm -f {} \;
-      done
-      for file in README.md HISTORY.md CONTRIBUTING.md CHANGE*.md .gitmodules .gitattributes .gitignore; do
-        find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname $file -exec rm -f {} \;
-      done
-      find $SNAPCRAFT_PART_INSTALL/lib/node_modules -type f -iname "*~" -exec rm -f {} \;
+      npm install 
+      npm run build
 
       # set version
       VER=$(npm show node-red version)
       echo "VERSION $VER"
       snapcraftctl set-version $VER
 
-      # copy node
+      # copy node and npm
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -av $SNAPCRAFT_PART_SRC/../npm/bin/node $SNAPCRAFT_PART_INSTALL/bin/
-  settings:
-    plugin: dump
-    source: snap/local/settings # snapcraft now prefers local parts to be in snap/local
-    organize:
-      start.sh: "bin/startNR"
-      desktop-launch: "bin/desktop-launch"
+      cp -av $SNAPCRAFT_PART_SRC/../npm/bin/npm $SNAPCRAFT_PART_INSTALL/bin/
+      cp -av $SNAPCRAFT_PART_SRC/../npm/lib $SNAPCRAFT_PART_INSTALL/
+
+      # copy node-red
+      mkdir -p $SNAPCRAFT_PART_INSTALL/lib
+      cp -av node_modules $SNAPCRAFT_PART_INSTALL/lib/
+      cp -av packages/node_modules $SNAPCRAFT_PART_INSTALL/lib/
+      cp -av *.json $SNAPCRAFT_PART_INSTALL/
+      cp -av *.md $SNAPCRAFT_PART_INSTALL/
+      cp -av LICENSE $SNAPCRAFT_PART_INSTALL/
+  toolchain:
+    plugin: nil
+    source: .
+    stage-packages:
+      - libc6-dev
+      - libstdc++-6-dev
+      - libstdc++6
+      - g++
+      - gcc
+      - make
+    override-build: |
+      snapcraftctl build
+      cd $SNAPCRAFT_PART_INSTALL/usr/bin
+      ln -s gcc cc

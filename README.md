@@ -1,4 +1,4 @@
-# Node-RED Snap package
+# Node-RED Snap package specific for Raspberry Pi
 
 [![platform](https://img.shields.io/badge/platform-Node--RED-red)](https://nodered.org)
 [![GitHub version](https://badge.fury.io/gh/node-red%2Fnode-red.svg)](https://badge.fury.io/gh/node-red%2Fnode-red)
@@ -12,59 +12,51 @@ By default builds get automatically placed in the edge channel, and then promote
 
 ### Restrictions
 
-When installed as a Snap package, it will run in a secure container that does
-not have access to any external facilities that may be needed for you to use, such as:
+When installed as a Snap package, you will have to connect all the required snap interfaces
+your flows will use.
 
- - You cannot install extra nodes that require natively compiled code as the build tools are not built in.
- - You cannot use projects mode as that requires comman line access to git and that is also not built in.
- - access to the main system storage/disk
- - `gcc` - needed to compile any binary components of nodes you want to install
- - `git` - needed if you want to use the Projects feature
- - direct access to gpio hardware
- - access to any external commands your flows want to use with the Exec node (for example).
+The snap does come with the palette editor enabled and ships the gcc toolchaion as well as a
+bunch of development libraries so that npm can dynamically compile nodes where required when
+you add them vias the palette editor.
 
-You may be able relax this by installing the snap in `--classic` mode but this is not advised, and Canonical have tightened the scope recently and this may no longer be possible unless in development mode.
+#### Interfaces
 
-**ping**: If you want to use the ping node you must manually connect the network-observe interface.
+To see all connected and available connections please run:
 
-    sudo snap connect node-red:network-observe
+    sudo snap connections node-red-rpi
 
+To connect i.e. a GPIO interface (GPIO 14 here) you do:
+
+    sudo snap connect node-red-rpi:gpio pi:bcm-gpio-14
+    sudo snap connect node-red-rpi:gpio-memory-control
+
+Similar for i2c:
+
+    sudo snap connect node-red-rpi:i2c pi:i2c-1
 
 #### Installing
 
-    snap install node-red
+    snap install node-red-rpi
 
 When the snap is running you can view the Node-RED log using
 
-    journalctl -f -u snap.node-red*
+    journalctl -f -u snap.node-red-rpi*
 
 You can also stop and restart the application by
+
+    snap restart node-red-rpi
 
     snap disable node-red
     snap enable node-red
 
-Currently the ONLY serial support is for /dev/ttyS0 style ports.
-USB serial ports (hot-pluggable) are not yet supported by Snap.
-
 
 #### Configuration
 
-The **settings.js** and **flows.json** file are located in the `/root/snap/node-red/current/` directory.
+The **settings.js** and **flows.json** file are located in the `/root/snap/node-red-rpi/current/` directory.
 If you do need to read and write files - this is the only directory path you will have access to from outside
 the secure container.
 
-**Note:** The path to the flows file is currently fixed to `flows.json` in [start.sh](nodered.snap/blob/master/snap/local/settings/start.sh) and therefore cannot be changed in `settings.js`.
-
 To install any extra nodes, the best option is to use the Manage Palette option in the editor.
-To install via the command line you can
-
-    sudo su -
-    cd /root/snap/node-red/current/
-    node-red.npm i --unsafe-perm node-red-contrib-my-great-node-name
-    snap restart node-red
-
-The base port can be set by the `$PORT` environment variable, or in the `settings.js` file.
-
 
 #### Building
 
