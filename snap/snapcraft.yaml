@@ -104,10 +104,10 @@ layout:
     bind-file: $SNAP/usr/bin/free
   /usr/bin/top:
     bind-file: $SNAP/usr/bin/top
-  /usr/lib/arm-linux-gnueabihf/libpthread_nonshared.a:
-    bind-file: $SNAP/usr/lib/arm-linux-gnueabihf/libpthread_nonshared.a
-  /usr/lib/arm-linux-gnueabihf/libc_nonshared.a:
-    bind-file: $SNAP/usr/lib/arm-linux-gnueabihf/libc_nonshared.a
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libpthread_nonshared.a:
+    bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libpthread_nonshared.a
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a:
+    bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
 
 parts:
   sensor-libs:
