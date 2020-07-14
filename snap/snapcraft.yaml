@@ -6,9 +6,46 @@ description:
   hardware devices, APIs and online services in new and interesting ways.
   For more information see http://nodered.org
 
-  This snap is based on https://snapcraft.io/node-red but has additional
-  Raspberry Pi specific node modules, i2c support and ships the
-  node dashboard module for displaying data.
+  This snap is based on https://github.com/node-red but has additional
+  Raspberry Pi specific sensor libraries and a toolchain included.
+
+  Node-RED listens by default on port 1880 after installation.
+
+  You will have to connect all the required snap interfaces for hardware
+  your flows will use.
+
+  The snap does come with the palette editor enabled and ships the gcc
+  toolchain as well as a bunch of development libraries so that npm can
+  dynamically compile nodes where required when you add them via the
+  palette editor.
+
+  To see all connected and available connections please run
+
+      sudo snap connections node-red-rpi
+
+  To connect i.e. a GPIO interface (GPIO 14 here) you do
+
+      sudo snap connect node-red-rpi:gpio pi:bcm-gpio-14
+      sudo snap connect node-red-rpi:gpio-memory-control
+
+  Similar for i2c
+
+      sudo snap connect node-red-rpi:i2c pi:i2c-1
+
+  When the snap is running you can view the Node-RED log using
+
+      journalctl -f -u snap.node-red-rpi*
+
+  You can also stop and restart the application by
+
+      snap restart node-red-rpi
+
+      snap disable node-red-rpi
+      snap enable node-red-rpi
+
+  The settings.js and flows.json files are located in
+  the `/root/snap/node-red-rpi/current/` directory.
+
 confinement: strict
 grade: stable
 base: core18
@@ -95,13 +132,17 @@ parts:
     stage-packages:
       - i2c-tools
       - libffi6
+      - libffi-dev
+      - libi2c-dev
       - libssl1.0.0
+      - libssl-dev
       - procps
       - python-minimal
       - python-pil
       - python-smbus
     override-pull: |
       snapcraftctl pull
+
       # hack to make adafruit dht lib always build for pi(2/3/4)
       tar xf ../python-packages/Adafruit_Python_DHT-1.4.0.tar.gz
       plat_detect="Adafruit_Python_DHT-1.4.0/Adafruit_DHT/platform_detect.py"
@@ -146,6 +187,7 @@ parts:
         export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
       fi
 
+      # build node-red
       npm install 
       npm run build
 
@@ -164,6 +206,8 @@ parts:
       mkdir -p $SNAPCRAFT_PART_INSTALL/lib
       cp -av node_modules $SNAPCRAFT_PART_INSTALL/lib/
       cp -av packages/node_modules $SNAPCRAFT_PART_INSTALL/lib/
+
+      # copy metadata and docs
       cp -av *.json $SNAPCRAFT_PART_INSTALL/
       cp -av *.md $SNAPCRAFT_PART_INSTALL/
       cp -av LICENSE $SNAPCRAFT_PART_INSTALL/
@@ -179,5 +223,7 @@ parts:
       - make
     override-build: |
       snapcraftctl build
+
+      # create symlink that normally comes from update-alternatives
       cd $SNAPCRAFT_PART_INSTALL/usr/bin
       ln -s gcc cc

@@ -15,9 +15,9 @@ By default builds get automatically placed in the edge channel, and then promote
 When installed as a Snap package, you will have to connect all the required snap interfaces
 your flows will use.
 
-The snap does come with the palette editor enabled and ships the gcc toolchaion as well as a
+The snap does come with the palette editor enabled and ships the gcc toolchain as well as a
 bunch of development libraries so that npm can dynamically compile nodes where required when
-you add them vias the palette editor.
+you add them via the palette editor.
 
 #### Interfaces
 
@@ -46,8 +46,8 @@ You can also stop and restart the application by
 
     snap restart node-red-rpi
 
-    snap disable node-red
-    snap enable node-red
+    snap disable node-red-rpi
+    snap enable node-red-rpi
 
 
 #### Configuration
@@ -60,4 +60,4 @@ To install any extra nodes, the best option is to use the Manage Palette option 
 
 #### Building
 
-To re-build locally, modify the snapcraft.yaml as required, and then execute `build_snap.sh`
+To re-build locally, modify the snapcraft.yaml as required, and then execute snapcraft
