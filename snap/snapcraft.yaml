@@ -220,6 +220,7 @@ parts:
       - libstdc++6
       - g++
       - gcc
+      - git
       - make
     override-build: |
       snapcraftctl build
