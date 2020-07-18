@@ -57,7 +57,7 @@ architectures:
 
 apps:
   node-red:
-    command: node $SNAP/lib/node_modules/node-red/red.js
+    command: node $NODE_OPTS $SNAP/lib/node_modules/node-red/red.js
     daemon: simple
     restart-condition: on-failure
     environment:
@@ -77,6 +77,7 @@ apps:
       - home
       - i2c
       - iio
+      - log-observe
       - login-session-observe
       - mount-observe
       - network-bind
@@ -121,6 +122,7 @@ parts:
       - mcp3008
       - picamera
       - unicornhat
+      - nfcpy
     build-packages:
       - libssl-dev
       - libffi-dev
@@ -130,12 +132,19 @@ parts:
     build-environment:
       - READTHEDOCS: 'True'
     stage-packages:
+      - coreutils
+      - bluetooth
+      - bluez
       - i2c-tools
+      - libbluetooth3
+      - libbluetooth-dev
       - libffi6
       - libffi-dev
       - libi2c-dev
       - libssl1.0.0
       - libssl-dev
+      - libudev1
+      - libudev-dev
       - procps
       - python-minimal
       - python-pil
@@ -159,22 +168,9 @@ parts:
     nodejs-package-manager: npm
     after: [ sensor-libs ]
     stage-packages:
-      - bluetooth
-      - bluez
       - libatomic1
-      - libbluetooth3
-      - libbluetooth-dev
-      - libudev1
-      - libudev-dev
-      - python
     build-packages:
       - build-essential
-      - libkrb5-dev
-      - libatomic1
-      - libbluetooth-dev
-      - libudev-dev
-      - libzmq3-dev
-      - python2.7-minimal
     override-build: |
       PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
       npm config set unsafe-perm True
@@ -222,6 +218,7 @@ parts:
       - gcc
       - git
       - make
+      - openssh-client
     override-build: |
       snapcraftctl build
 
