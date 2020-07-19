@@ -85,6 +85,7 @@ apps:
       - network-observe
       - physical-memory-control
       - pulseaudio
+      - raw-usb
       - removable-media
       - serial-port
       - shutdown
@@ -121,8 +122,8 @@ parts:
       - adafruit-mcp3008
       - mcp3008
       - picamera
+      - pyserial
       - unicornhat
-      - nfcpy
     build-packages:
       - libssl-dev
       - libffi-dev
@@ -145,6 +146,8 @@ parts:
       - libssl-dev
       - libudev1
       - libudev-dev
+      - libusb-1.0-0
+      - libusb-1.0-0-dev
       - procps
       - python-minimal
       - python-pil
@@ -224,4 +227,4 @@ parts:
 
       # create symlink that normally comes from update-alternatives
       cd $SNAPCRAFT_PART_INSTALL/usr/bin
-      ln -s gcc cc
+      ln -sf gcc cc
