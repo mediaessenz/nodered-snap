@@ -123,6 +123,7 @@ parts:
       - mcp3008
       - picamera
       - pyserial
+      - rpi-ws281x
       - unicornhat
     build-packages:
       - libssl-dev
