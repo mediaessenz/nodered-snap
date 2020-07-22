@@ -10,6 +10,7 @@ description:
   Raspberry Pi specific sensor libraries and a toolchain included.
 
   Node-RED listens by default on port 1880 after installation.
+  (This can be overridden with snap set node-red-rpi port="XXXX")
 
   You will have to connect all the required snap interfaces for hardware
   your flows will use.
@@ -46,6 +47,16 @@ description:
   The settings.js and flows.json files are located in
   the `/root/snap/node-red-rpi/current/` directory.
 
+  To set addifional node options you can use (i.e. to limit ram usage
+  on a raspberry Pi)
+
+      snap set node-red-rpi node-options="--max-old-space-size=256"
+
+  To debug specific node modules the snap offers the debug-modules option
+  with similar content you would set via NODE_DEBUG normally
+
+      snap set node-red-rpi debug-modules="https"
+
 confinement: strict
 grade: stable
 base: core18
@@ -57,7 +68,9 @@ architectures:
 
 apps:
   node-red:
-    command: node $NODE_OPTS $SNAP/lib/node_modules/node-red/red.js
+    command-chain:
+      - bin/set-config
+    command: node $SNAP/lib/node_modules/node-red/red.js
     daemon: simple
     restart-condition: on-failure
     environment:
@@ -110,6 +123,8 @@ layout:
     bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libpthread_nonshared.a
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a:
     bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
+  /usr/bin/sudo:
+    bind-file: $SNAP/usr/bin/sudo
 
 parts:
   sensor-libs:
@@ -229,3 +244,16 @@ parts:
       # create symlink that normally comes from update-alternatives
       cd $SNAPCRAFT_PART_INSTALL/usr/bin
       ln -sf gcc cc
+  wrappers:
+    plugin: nil
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp $SNAPCRAFT_PROJECT_DIR/snap/local/set-config $SNAPCRAFT_PART_INSTALL/bin/
+
+      # some node modules use sudo calls, make sudo a no-op, we run
+      # as root in the snadbox anyway
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/bin
+      echo '#! /bin/sh' >$SNAPCRAFT_PART_INSTALL/usr/bin/sudo
+      echo '' >>$SNAPCRAFT_PART_INSTALL/usr/bin/sudo
+      echo 'exec "$@"' >>$SNAPCRAFT_PART_INSTALL/usr/bin/sudo
+      chmod +x $SNAPCRAFT_PART_INSTALL/usr/bin/sudo

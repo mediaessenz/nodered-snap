@@ -1,0 +1,18 @@
+#! /bin/sh
+
+if [ -n "$(snapctl get node-options)" ]; then
+    export NODE_OPTIONS="$(snapctl get node-options)"
+    logger "Using node options: $NODE_OPTIONS"
+fi
+
+if [ -n "$(snapctl get port)" ]; then
+    export PORT="$(snapctl get port)"
+    logger "Port overridden to: $PORT"
+fi
+
+if [ -n "$(snapctl get debug-modules)" ]; then
+    export NODE_DEBUG="$(snapctl get debug-modules)"
+    logger "Node, debugging modules: $NODE_DEBUG"
+fi
+
+exec "$@"
