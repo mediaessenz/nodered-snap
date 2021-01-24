@@ -181,9 +181,9 @@ parts:
       rm -rf Adafruit_Python_DHT-1.4.0
   node-red:
     source: https://github.com/node-red/node-red.git
-    source-tag: 1.1.2
+    source-tag: 1.2.7
     plugin: nodejs
-    nodejs-version: 10.21.0
+    nodejs-version: 10.22.1
     nodejs-package-manager: npm
     after: [ sensor-libs ]
     stage-packages:
